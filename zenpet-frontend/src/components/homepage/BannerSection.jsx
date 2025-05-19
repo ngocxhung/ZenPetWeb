@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 
 const bgImg =
   'https://images.unsplash.com/photo-1518717758536-85ae29035b6d?auto=format&fit=crop&w=1200&q=80'; // Ảnh chó đẹp, có thể thay bằng ảnh vòng định vị thực tế
@@ -13,6 +13,11 @@ const socialIcons = [
 ];
 
 export default function BannerSection() {
+  const [show, setShow] = useState(false);
+  const [hoverImg, setHoverImg] = useState(false);
+  useEffect(() => {
+    setTimeout(() => setShow(true), 200);
+  }, []);
   return (
     <section
       style={{
@@ -46,9 +51,12 @@ export default function BannerSection() {
           padding: '0 2vw 0 6vw',
           minWidth: 320,
           marginRight: 32,
+          opacity: show ? 1 : 0,
+          transform: show ? 'translateY(0)' : 'translateY(40px)',
+          transition: 'all 0.8s cubic-bezier(.4,1.3,.6,1)',
         }}
       >
-        <h1 style={{ fontSize: 44, fontWeight: 800, marginBottom: 18, lineHeight: 1.1 }}>
+        <h1 style={{ fontSize: 44, fontWeight: 800, marginBottom: 18, lineHeight: 1.1, textShadow: '0 2px 8px #0008' }}>
           Vòng định vị thú cưng <span style={{ color: '#ffd966' }}>ZenPet</span>
         </h1>
         <p style={{ fontSize: 20, maxWidth: 480, marginBottom: 32, textShadow: '0 2px 8px #0008' }}>
@@ -66,7 +74,11 @@ export default function BannerSection() {
             boxShadow: '0 2px 12px #0003',
             cursor: 'pointer',
             letterSpacing: 1,
+            transition: 'filter 0.25s, box-shadow 0.25s',
+            filter: show ? 'brightness(1)' : 'brightness(0.7)',
           }}
+          onMouseOver={e => {e.currentTarget.style.filter='brightness(1.15)';e.currentTarget.style.boxShadow='0 4px 24px #ffd96699';}}
+          onMouseOut={e => {e.currentTarget.style.filter='brightness(1)';e.currentTarget.style.boxShadow='0 2px 12px #0003';}}
         >
           Khám phá ngay
         </button>
@@ -93,7 +105,11 @@ export default function BannerSection() {
             boxShadow: '0 4px 32px #0005',
             background: '#fff',
             border: '6px solid #ffd966',
+            transform: hoverImg ? 'scale(1.07)' : 'scale(1)',
+            transition: 'transform 0.35s cubic-bezier(.4,1.3,.6,1)',
           }}
+          onMouseOver={() => setHoverImg(true)}
+          onMouseOut={() => setHoverImg(false)}
         />
       </div>
       {/* Icon mạng xã hội dọc bên phải */}
@@ -116,7 +132,7 @@ export default function BannerSection() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label={s.label}
-            style={{ color: '#ffd966', fontSize: 26, margin: 0, textShadow: '0 2px 8px #0008' }}
+            style={{ color: '#ffd966', fontSize: 26, margin: 0, textShadow: '0 2px 8px #0008', opacity: show ? 1 : 0, transition: 'opacity 0.8s', transitionDelay: `${0.2 + i * 0.1}s` }}
           >
             <i className={s.icon}></i>
           </a>
