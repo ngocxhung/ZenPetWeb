@@ -1,5 +1,5 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 
 const headerStyle = {
   background: '#fff', // white background
@@ -49,7 +49,41 @@ const authButtonStyle = {
   transition: 'transform 0.2s, box-shadow 0.2s',
 };
 
+const iconButtonStyle = {
+  background: 'none',
+  border: 'none',
+  color: '#7c4a03',
+  cursor: 'pointer',
+  padding: '8px',
+  display: 'flex',
+  alignItems: 'center',
+  gap: '4px',
+  fontSize: 16,
+  fontWeight: 600,
+};
+
 export default function Header() {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [user, setUser] = useState(null);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    const userData = localStorage.getItem('user');
+    if (token && userData) {
+      setIsAuthenticated(true);
+      setUser(JSON.parse(userData));
+    }
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    setIsAuthenticated(false);
+    setUser(null);
+    navigate('/');
+  };
+
   return (
     <header style={headerStyle}>
       <nav style={navStyle}>
@@ -61,41 +95,104 @@ export default function Header() {
           <Link to="/about" style={{color: '#7c4a03', textDecoration: 'none'}}>Về chúng tôi</Link>
           <Link to="/services" style={{color: '#7c4a03', textDecoration: 'none'}}>Dịch vụ</Link>
           <Link to="/products" style={{color: '#7c4a03', textDecoration: 'none'}}>Sản phẩm</Link>
-          <Link to="/login">
-            <button 
-              style={authButtonStyle}
-              onMouseOver={e => {
-                e.currentTarget.style.transform = 'scale(1.05)';
-                e.currentTarget.style.boxShadow = '0 4px 12px #e0c08d66';
-              }}
-              onMouseOut={e => {
-                e.currentTarget.style.transform = 'scale(1)';
-                e.currentTarget.style.boxShadow = '0 2px 8px #e0c08d44';
-              }}
-            >
-              Đăng nhập
-            </button>
-          </Link>
-          <Link to="/register">
-            <button 
-              style={{
-                ...authButtonStyle,
-                background: '#ffd966',
-                color: '#7c4a03',
-                border: '2px solid #7c4a03',
-              }}
-              onMouseOver={e => {
-                e.currentTarget.style.transform = 'scale(1.05)';
-                e.currentTarget.style.boxShadow = '0 4px 12px #e0c08d66';
-              }}
-              onMouseOut={e => {
-                e.currentTarget.style.transform = 'scale(1)';
-                e.currentTarget.style.boxShadow = '0 2px 8px #e0c08d44';
-              }}
-            >
-              Đăng ký
-            </button>
-          </Link>
+          
+          {isAuthenticated ? (
+            <>
+              <Link to="/profile">
+                <button 
+                  style={iconButtonStyle}
+                  onMouseOver={e => {
+                    e.currentTarget.style.transform = 'scale(1.05)';
+                  }}
+                  onMouseOut={e => {
+                    e.currentTarget.style.transform = 'scale(1)';
+                  }}
+                >
+                  <img 
+                    src="https://cdn-icons-png.flaticon.com/512/1077/1077114.png" 
+                    alt="Profile" 
+                    style={{width: 24, height: 24}}
+                  />
+                  {user?.name}
+                </button>
+              </Link>
+              <Link to="/cart">
+                <button 
+                  style={iconButtonStyle}
+                  onMouseOver={e => {
+                    e.currentTarget.style.transform = 'scale(1.05)';
+                  }}
+                  onMouseOut={e => {
+                    e.currentTarget.style.transform = 'scale(1)';
+                  }}
+                >
+                  <img 
+                    src="https://cdn-icons-png.flaticon.com/512/2838/2838895.png" 
+                    alt="Cart" 
+                    style={{width: 24, height: 24}}
+                  />
+                  Giỏ hàng
+                </button>
+              </Link>
+              <button 
+                onClick={handleLogout}
+                style={{
+                  ...authButtonStyle,
+                  background: '#ffd966',
+                  color: '#7c4a03',
+                  border: '2px solid #7c4a03',
+                }}
+                onMouseOver={e => {
+                  e.currentTarget.style.transform = 'scale(1.05)';
+                  e.currentTarget.style.boxShadow = '0 4px 12px #e0c08d66';
+                }}
+                onMouseOut={e => {
+                  e.currentTarget.style.transform = 'scale(1)';
+                  e.currentTarget.style.boxShadow = '0 2px 8px #e0c08d44';
+                }}
+              >
+                Đăng xuất
+              </button>
+            </>
+          ) : (
+            <>
+              <Link to="/login">
+                <button 
+                  style={authButtonStyle}
+                  onMouseOver={e => {
+                    e.currentTarget.style.transform = 'scale(1.05)';
+                    e.currentTarget.style.boxShadow = '0 4px 12px #e0c08d66';
+                  }}
+                  onMouseOut={e => {
+                    e.currentTarget.style.transform = 'scale(1)';
+                    e.currentTarget.style.boxShadow = '0 2px 8px #e0c08d44';
+                  }}
+                >
+                  Đăng nhập
+                </button>
+              </Link>
+              <Link to="/register">
+                <button 
+                  style={{
+                    ...authButtonStyle,
+                    background: '#ffd966',
+                    color: '#7c4a03',
+                    border: '2px solid #7c4a03',
+                  }}
+                  onMouseOver={e => {
+                    e.currentTarget.style.transform = 'scale(1.05)';
+                    e.currentTarget.style.boxShadow = '0 4px 12px #e0c08d66';
+                  }}
+                  onMouseOut={e => {
+                    e.currentTarget.style.transform = 'scale(1)';
+                    e.currentTarget.style.boxShadow = '0 2px 8px #e0c08d44';
+                  }}
+                >
+                  Đăng ký
+                </button>
+              </Link>
+            </>
+          )}
         </div>
       </nav>
     </header>

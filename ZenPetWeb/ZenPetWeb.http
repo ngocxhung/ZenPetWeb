@@ -1,4 +1,4 @@
-@ZenPetWeb_HostAddress = http://localhost:5066
+@ZenPetWeb_HostAddress = http://localhost:7001
 
 GET {{ZenPetWeb_HostAddress}}/weatherforecast/
 Accept: application/json

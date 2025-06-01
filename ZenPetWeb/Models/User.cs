@@ -1,46 +1,43 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ZenPetWeb.Models
 {
     public class User
     {
-        [Key]
+        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int UserId { get; set; }
 
         [Required]
-        [StringLength(50)]
-        public string Username { get; set; }
-
+        [StringLength(100)]
+        public string UserName { get; set; }
+        [Required]
+        [StringLength(100)]
+        public string FullName { get; set; }
         [Required]
         [StringLength(100)]
         public string Password { get; set; }
-
         [Required]
         [StringLength(100)]
-        [EmailAddress]
         public string Email { get; set; }
-
-        [StringLength(100)]
-        public string FullName { get; set; }
-
-        [StringLength(20)]
+        [Required]
+        [StringLength(15)]
         public string PhoneNumber { get; set; }
-
-        [StringLength(200)]
+        [Required]
+        [StringLength(100)]
         public string Address { get; set; }
-
-        [StringLength(20)]
-        public string Role { get; set; } = "User";
-
-        public DateTime CreatedAt { get; set; } = DateTime.Now;
-
-        public bool Status { get; set; } = true;
-
-        // Navigation properties
-        public virtual ICollection<Order> Orders { get; set; }
-        public virtual ICollection<Review> Reviews { get; set; }
-        public virtual ICollection<BlogPost> BlogPosts { get; set; }
+        [Required]
+        [StringLength(50)]
+        public string Role { get; set; } // e.g., "Admin", "User", "Veterinarian"
+        [Required]
+        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+        [Required]
+        public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
+        [StringLength(500)]
+        public string? ProfilePictureUrl { get; set; } // URL to the user's profile picture
+        // Navigation property to Orders placed by the user
+        public virtual ICollection<Order> Orders { get; set; } = new List<Order>();
+        // Navigation property to Reviews written by the user
+        public virtual ICollection<Review> Reviews { get; set; } = new List<Review>();
     }
-} 
+}
