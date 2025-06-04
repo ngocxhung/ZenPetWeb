@@ -13,7 +13,14 @@ public class Program
         var builder = WebApplication.CreateBuilder(args);
 
         // Add services to the container.
-        builder.Services.AddControllers();
+        builder.Services.AddControllers()
+     .AddJsonOptions(options =>
+     {
+         options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles;
+         options.JsonSerializerOptions.WriteIndented = true;
+     });
+
+
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
         
@@ -55,25 +62,21 @@ public class Program
             });
 
         var app = builder.Build();
+        // Gọi seed dữ liệu khi ứng dụng khởi động
         using (var scope = app.Services.CreateScope())
-        {
-            /*var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-            if (!context.Products.Any(p => p.Name == "Chíp định vị thú cưng"))
-            {
-                var product = new Product
-                {
-                    Name = "Chíp định vị thú cưng",
-                    Description = "Chíp định vị thông minh giúp bạn theo dõi thú cưng mọi lúc mọi nơi.",
-                    Price = 499000, // Giá tham khảo, có thể chỉnh
-                    Stock = 20, // Số lượng tùy ý
-                    Category = "Phụ kiện",
-                    ImageUrl = "img/chipdinhvi.png",
-                    Status = true
-                };
-                context.Products.Add(product);
-                context.SaveChanges();
-            }*/
-        }
+{
+    var services = scope.ServiceProvider;
+    try
+    {
+        var context = services.GetRequiredService<ApplicationDbContext>();
+        DbInitializer.Initialize(context);
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine("Lỗi seed dữ liệu: " + ex.Message);
+    }
+}
+
         // Configure the HTTP request pipeline.
         if (app.Environment.IsDevelopment())
         {
