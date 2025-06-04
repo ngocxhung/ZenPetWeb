@@ -7,13 +7,12 @@ namespace ZenPetWeb.Models
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int OrderId { get; set; }
-        [Required]
         public int UserId { get; set; }
         [Required]
         public decimal? TotalAmount { get; set; } // Total amount of the order
         [Required]
         // Status of the order (e.g., Pending, Completed, Cancelled) Pending by default
-        public string Status { get; set; } = "Pending";
+        public string Status { get; set; } = "Đang xử lý";
         [Required]
         [StringLength(100)]
         public string PaymentMethod { get; set; } // Payment method used for the order
