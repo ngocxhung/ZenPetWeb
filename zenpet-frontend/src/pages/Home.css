@@ -1,0 +1,603 @@
+.zenpet-homepage {
+  width: 100vw;
+  min-height: 100vh;
+  background: #fff;
+  margin: 0;
+  padding: 0;
+}
+
+.zenpet-bg {
+  width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.bg1 {
+  background-image: linear-gradient(rgba(255,192,203,0.25),rgba(255,192,203,0.25)), url('../assets/banner1.jpg');
+}
+.bg2 {
+  background-image: linear-gradient(rgba(255,192,203,0.25),rgba(255,192,203,0.25)), url('../assets/banner2.jpg');
+}
+.bg3 {
+  background-image: linear-gradient(rgba(255,192,203,0.25),rgba(255,192,203,0.25)), url('../assets/banner3.jpg');
+}
+
+.zenpet-overlay {
+  background: rgba(255,255,255,0.75);
+  border-radius: 24px;
+  padding: 40px 32px;
+  box-shadow: 0 4px 24px rgba(255,192,203,0.10);
+  text-align: center;
+  max-width: 600px;
+}
+.zenpet-overlay h1 {
+  color: #e14b85;
+  font-size: 2.5rem;
+  margin-bottom: 18px;
+  font-family: 'Segoe UI',sans-serif;
+  font-weight: 700;
+}
+.zenpet-overlay p {
+  color: #b94e7c;
+  font-size: 1.25rem;
+  font-weight: 500;
+}
+
+@media (max-width: 700px) {
+  .zenpet-bg {
+    min-height: 60vh;
+  }
+  .zenpet-overlay {
+    padding: 18px 6px;
+    max-width: 98vw;
+  }
+  .zenpet-overlay h1 {
+    font-size: 1.3rem;
+  }
+  .zenpet-overlay p {
+    font-size: 1rem;
+  }
+}
+
+.zenpet-homepage-carousel {
+  width: 100vw;
+  height: calc(100vh - 70px);
+  position: relative;
+  overflow: hidden;
+  background: #fff;
+  padding-top: 70px;
+}
+
+.zenpet-carousel-banner {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  width: 100vw;
+  height: calc(100vh - 70px);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0;
+  transition: opacity 1.1s cubic-bezier(.4,0,.2,1), transform 1.1s cubic-bezier(.4,0,.2,1);
+  transform: scale(1.03);
+  will-change: opacity, transform;
+  z-index: 1;
+}
+.zenpet-carousel-banner.active {
+  opacity: 1;
+  transform: scale(1);
+  z-index: 2;
+}
+.bg1 {
+  background-image: linear-gradient(rgba(255,192,203,0.18),rgba(255,192,203,0.18)), url('../assets/banner1.jpg');
+}
+.bg2 {
+  background-image: linear-gradient(rgba(255,192,203,0.18),rgba(255,192,203,0.18)), url('../assets/banner2.jpg');
+}
+.bg3 {
+  background-image: linear-gradient(rgba(255,192,203,0.18),rgba(255,192,203,0.18)), url('../assets/banner3.jpg');
+}
+
+.zenpet-carousel-dots {
+  position: absolute;
+  left: 50%;
+  bottom: 38px;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 16px;
+  z-index: 10;
+}
+.zenpet-carousel-dots button {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: none;
+  background: #ffe4ec;
+  box-shadow: 0 2px 8px #ffd6e6;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.3s;
+  outline: none;
+  opacity: 0.7;
+}
+.zenpet-carousel-dots button.active {
+  background: #e14b85;
+  opacity: 1;
+  transform: scale(1.25);
+  box-shadow: 0 4px 16px #ffb6d5;
+}
+.zenpet-carousel-dots button:hover {
+  background: #ffb6d5;
+  opacity: 1;
+  transform: scale(1.15);
+}
+
+@media (max-width: 700px) {
+  .zenpet-homepage-carousel, .zenpet-carousel-banner {
+    height: calc(100vh - 60px);
+    min-height: calc(100vh - 60px);
+    max-height: calc(100vh - 60px);
+    padding-top: 60px;
+  }
+  .zenpet-carousel-banner {
+    background-position: center center;
+    background-size: cover;
+  }
+  .zenpet-carousel-dots {
+    bottom: 18px;
+    gap: 10px;
+  }
+}
+
+@media (max-width: 400px) {
+  .zenpet-homepage-carousel, .zenpet-carousel-banner {
+    min-height: 120vw;
+    height: 100vh;
+    max-height: 100vh;
+  }
+}
+
+.zenpet-home-content {
+  width: 100vw;
+  background: linear-gradient(180deg, #fff 80%, #ffe4ec 100%);
+  padding: 56px 0 48px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 -2px 24px #ffd6e6;
+}
+.zenpet-home-intro {
+  max-width: 700px;
+  text-align: center;
+  margin-bottom: 38px;
+}
+.zenpet-home-intro h2 {
+  color: #e14b85;
+  font-size: 2.1rem;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+.zenpet-home-intro p {
+  color: #b94e7c;
+  font-size: 1.18rem;
+  font-weight: 500;
+}
+.zenpet-home-features {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 28px;
+  justify-content: center;
+  margin-bottom: 38px;
+}
+.zenpet-feature-card {
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 2px 16px #ffd6e6;
+  padding: 32px 24px 24px 24px;
+  width: 240px;
+  min-width: 180px;
+  text-align: center;
+  transition: transform 0.25s, box-shadow 0.25s;
+  cursor: pointer;
+}
+.zenpet-feature-card:hover {
+  transform: translateY(-8px) scale(1.04);
+  box-shadow: 0 8px 32px #ffb6d5;
+}
+.zenpet-feature-icon {
+  font-size: 2.2rem;
+  margin-bottom: 12px;
+  display: block;
+}
+.zenpet-feature-card h3 {
+  color: #e14b85;
+  font-size: 1.18rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+.zenpet-feature-card p {
+  color: #b94e7c;
+  font-size: 1rem;
+}
+.zenpet-home-cta {
+  margin-top: 18px;
+  text-align: center;
+}
+.zenpet-home-cta h3 {
+  color: #e14b85;
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+.zenpet-home-cta p {
+  color: #b94e7c;
+  font-size: 1.05rem;
+  margin-bottom: 16px;
+}
+.zenpet-cta-btn {
+  display: inline-block;
+  background: linear-gradient(90deg, #ffb6d5 0%, #e14b85 100%);
+  color: #fff;
+  font-weight: 700;
+  font-size: 1.1rem;
+  border: none;
+  border-radius: 24px;
+  padding: 12px 36px;
+  box-shadow: 0 2px 12px #ffd6e6;
+  text-decoration: none;
+  transition: background 0.2s, transform 0.2s;
+}
+.zenpet-cta-btn:hover {
+  background: linear-gradient(90deg, #e14b85 0%, #ffb6d5 100%);
+  transform: scale(1.06);
+}
+@media (max-width: 900px) {
+  .zenpet-home-features {
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+  }
+  .zenpet-feature-card {
+    width: 90vw;
+    max-width: 340px;
+  }
+}
+
+/* Layout tổng */
+.zenpet-homepage-layout {
+  width: 100vw;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-x: hidden;
+}
+
+/* Hero Section */
+.zenpet-hero {
+  width: 100vw;
+  min-height: 480px;
+  background: linear-gradient(90deg, #fff 60%, #ffe4ec 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 0 40px 0;
+  gap: 40px;
+}
+.zenpet-hero-content {
+  max-width: 520px;
+  text-align: left;
+}
+.zenpet-hero-content h1 {
+  color: #e14b85;
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 18px;
+}
+.zenpet-hero-content p {
+  color: #b94e7c;
+  font-size: 1.18rem;
+  margin-bottom: 28px;
+}
+.zenpet-hero-img {
+  width: 340px;
+  height: 340px;
+  background: url('../assets/banner1.jpg') center/cover no-repeat;
+  border-radius: 32px;
+  box-shadow: 0 8px 32px #ffd6e6;
+}
+
+/* Section chung */
+.zenpet-section {
+  width: 100vw;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 48px 0 32px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.zenpet-section-title {
+  color: #e14b85;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 32px;
+  text-align: center;
+}
+
+/* Services */
+.zenpet-services-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 28px;
+  justify-content: center;
+}
+.zenpet-service-card {
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 2px 16px #ffd6e6;
+  padding: 32px 24px 24px 24px;
+  width: 200px;
+  min-width: 160px;
+  text-align: center;
+  transition: transform 0.25s, box-shadow 0.25s;
+  cursor: pointer;
+}
+.zenpet-service-card:hover {
+  transform: translateY(-8px) scale(1.04);
+  box-shadow: 0 8px 32px #ffb6d5;
+}
+.zenpet-service-card span {
+  font-size: 2.2rem;
+  margin-bottom: 12px;
+  display: block;
+}
+.zenpet-service-card h3 {
+  color: #e14b85;
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+.zenpet-service-card p {
+  color: #b94e7c;
+  font-size: 1rem;
+}
+
+/* Featured */
+.zenpet-featured-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 32px;
+  justify-content: center;
+}
+.zenpet-featured-card {
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 2px 16px #ffd6e6;
+  padding: 0 0 24px 0;
+  width: 300px;
+  min-width: 220px;
+  text-align: center;
+  transition: transform 0.25s, box-shadow 0.25s;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.zenpet-featured-card:hover {
+  transform: translateY(-8px) scale(1.04);
+  box-shadow: 0 8px 32px #ffb6d5;
+}
+.zenpet-featured-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 18px 18px 0 0;
+  margin-bottom: 14px;
+}
+.zenpet-featured-card h3 {
+  color: #e14b85;
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+.zenpet-featured-card p {
+  color: #b94e7c;
+  font-size: 1rem;
+  margin-bottom: 12px;
+}
+.zenpet-card-btn {
+  display: inline-block;
+  background: linear-gradient(90deg, #ffb6d5 0%, #e14b85 100%);
+  color: #fff;
+  font-weight: 700;
+  font-size: 1rem;
+  border: none;
+  border-radius: 18px;
+  padding: 8px 24px;
+  box-shadow: 0 2px 8px #ffd6e6;
+  text-decoration: none;
+  transition: background 0.2s, transform 0.2s;
+}
+.zenpet-card-btn:hover {
+  background: linear-gradient(90deg, #e14b85 0%, #ffb6d5 100%);
+  transform: scale(1.06);
+}
+
+/* Steps */
+.zenpet-steps-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 28px;
+  justify-content: center;
+}
+.zenpet-step-card {
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 2px 16px #ffd6e6;
+  padding: 32px 24px 24px 24px;
+  width: 220px;
+  min-width: 160px;
+  text-align: center;
+  transition: transform 0.25s, box-shadow 0.25s;
+  cursor: pointer;
+}
+.zenpet-step-card:hover {
+  transform: translateY(-8px) scale(1.04);
+  box-shadow: 0 8px 32px #ffb6d5;
+}
+.zenpet-step-card span {
+  font-size: 2.2rem;
+  margin-bottom: 12px;
+  display: block;
+}
+.zenpet-step-card h3 {
+  color: #e14b85;
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+.zenpet-step-card p {
+  color: #b94e7c;
+  font-size: 1rem;
+}
+
+/* Testimonial */
+.zenpet-testimonial-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 32px;
+  justify-content: center;
+}
+.zenpet-testimonial-card {
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 2px 16px #ffd6e6;
+  padding: 28px 24px 20px 24px;
+  min-width: 260px;
+  max-width: 340px;
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+}
+.zenpet-testimonial-avatar {
+  font-size: 2.5rem;
+  background: #ffe4ec;
+  border-radius: 50%;
+  width: 54px;
+  height: 54px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 8px;
+}
+.zenpet-testimonial-card p {
+  color: #b94e7c;
+  font-size: 1.05rem;
+  margin-bottom: 8px;
+}
+.zenpet-testimonial-card span {
+  color: #e14b85;
+  font-size: 0.98rem;
+  font-weight: 600;
+}
+
+/* Partner logos */
+.zenpet-partner-logos {
+  display: flex;
+  gap: 32px;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 18px;
+}
+.zenpet-partner-logos img {
+  height: 38px;
+  object-fit: contain;
+  filter: grayscale(0.2) contrast(1.1);
+  opacity: 0.85;
+  transition: filter 0.2s, opacity 0.2s, transform 0.2s;
+}
+.zenpet-partner-logos img:hover {
+  filter: grayscale(0) contrast(1.2);
+  opacity: 1;
+  transform: scale(1.08);
+}
+
+/* Subscribe */
+.zenpet-subscribe-section {
+  background: #ffe4ec;
+  width: 100vw;
+  padding: 48px 0 32px 0;
+  display: flex;
+  justify-content: center;
+}
+.zenpet-subscribe-box {
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 2px 16px #ffd6e6;
+  padding: 32px 24px;
+  max-width: 420px;
+  width: 100%;
+  text-align: center;
+}
+.zenpet-subscribe-box h3 {
+  color: #e14b85;
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 18px;
+}
+.zenpet-subscribe-form {
+  display: flex;
+  gap: 12px;
+  margin-top: 8px;
+  justify-content: center;
+}
+.zenpet-subscribe-form input[type="email"] {
+  padding: 10px 16px;
+  border: 1px solid #ffb6d5;
+  border-radius: 8px;
+  font-size: 1rem;
+  width: 180px;
+  outline: none;
+}
+.zenpet-subscribe-form button {
+  background: #e14b85;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 22px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+  font-weight: 600;
+}
+.zenpet-subscribe-form button:hover {
+  background: #ffb6d5;
+}
+
+@media (max-width: 900px) {
+  .zenpet-hero {
+    flex-direction: column;
+    gap: 18px;
+    padding: 40px 0 20px 0;
+  }
+  .zenpet-hero-img {
+    width: 90vw;
+    height: 180px;
+    max-width: 340px;
+    min-width: 180px;
+  }
+  .zenpet-services-list, .zenpet-featured-list, .zenpet-steps-list, .zenpet-testimonial-list, .zenpet-partner-logos {
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+  }
+  .zenpet-service-card, .zenpet-featured-card, .zenpet-step-card, .zenpet-testimonial-card {
+    width: 90vw;
+    max-width: 340px;
+  }
+} 

@@ -1,0 +1,132 @@
+.zenpet-checkout-page {
+  min-height: 100vh;
+  background: #fff;
+  padding: 40px 0 32px 0;
+}
+.zenpet-checkout-header {
+  text-align: center;
+  color: #e14b85;
+  font-size: 2.1rem;
+  font-weight: 800;
+  margin-bottom: 38px;
+  letter-spacing: 1px;
+  animation: fadeInDown 0.7s;
+}
+.zenpet-checkout-content {
+  display: flex;
+  gap: 40px;
+  justify-content: center;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+.zenpet-checkout-form {
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 2px 16px #ffd6e0cc;
+  padding: 32px 24px;
+  min-width: 280px;
+  max-width: 340px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  animation: fadeInLeft 0.7s;
+}
+.zenpet-checkout-form label {
+  color: #e14b85;
+  font-weight: 600;
+  margin-bottom: 4px;
+  font-size: 1rem;
+}
+.zenpet-checkout-form input,
+.zenpet-checkout-form textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1.5px solid #ffd6e0;
+  font-size: 16px;
+  outline: none;
+  margin-top: 4px;
+  margin-bottom: 8px;
+  transition: border 0.2s, box-shadow 0.2s;
+}
+.zenpet-checkout-form input:focus,
+.zenpet-checkout-form textarea:focus {
+  border: 1.5px solid #e14b85;
+  box-shadow: 0 2px 8px #ffd6e0;
+}
+.zenpet-checkout-form button[type="submit"] {
+  width: 100%;
+  padding: 14px;
+  background: linear-gradient(90deg, #e14b85, #ffb6d5);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 18px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+  margin-top: 8px;
+}
+.zenpet-checkout-form button[type="submit"]:hover {
+  background: linear-gradient(90deg, #ffb6d5, #e14b85);
+  transform: scale(1.03);
+}
+.zenpet-checkout-success {
+  color: #fff;
+  background: #1bbf5c;
+  border-radius: 8px;
+  padding: 10px 0;
+  text-align: center;
+  margin-top: 10px;
+  animation: fadeIn 0.5s;
+}
+.zenpet-checkout-summary {
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 2px 16px #ffd6e0cc;
+  padding: 32px 24px;
+  min-width: 240px;
+  max-width: 320px;
+  animation: fadeInRight 0.7s;
+}
+.zenpet-checkout-summary h3 {
+  color: #e14b85;
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+.zenpet-checkout-summary ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 12px 0;
+}
+.zenpet-checkout-summary li {
+  display: flex;
+  justify-content: space-between;
+  color: #b94e7c;
+  font-size: 1rem;
+  margin-bottom: 6px;
+}
+.zenpet-checkout-total {
+  color: #e14b85;
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-top: 10px;
+  text-align: right;
+}
+@media (max-width: 700px) {
+  .zenpet-checkout-content {
+    flex-direction: column;
+    gap: 18px;
+    align-items: center;
+  }
+  .zenpet-checkout-form, .zenpet-checkout-summary {
+    min-width: 90vw;
+    max-width: 98vw;
+    padding: 18px 4vw;
+  }
+}
+@keyframes fadeInDown { 0%{opacity:0;transform:translateY(-30px);} 100%{opacity:1;transform:none;} }
+@keyframes fadeInLeft { 0%{opacity:0;transform:translateX(-30px);} 100%{opacity:1;transform:none;} }
+@keyframes fadeInRight { 0%{opacity:0;transform:translateX(30px);} 100%{opacity:1;transform:none;} }
+@keyframes fadeIn { 0%{opacity:0;} 100%{opacity:1;} } 

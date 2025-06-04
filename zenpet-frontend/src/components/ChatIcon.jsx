@@ -3,7 +3,7 @@ import React from 'react';
 export default function ChatIcon() {
   return (
     <a
-      href="https://m.me/your.messenger.username" // Replace with your actual Messenger link
+      href="https://m.me/zenpets.vn"
       target="_blank"
       rel="noopener noreferrer"
       style={{
@@ -13,22 +13,22 @@ export default function ChatIcon() {
         width: 60,
         height: 60,
         borderRadius: '50%',
-        background: '#0084ff',
+        background: '#e14b85',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        boxShadow: '0 4px 12px rgba(0, 132, 255, 0.4)',
+        boxShadow: '0 4px 12px #ffb6d580',
         cursor: 'pointer',
         transition: 'transform 0.2s, box-shadow 0.2s',
         zIndex: 1000,
       }}
       onMouseOver={e => {
         e.currentTarget.style.transform = 'scale(1.1)';
-        e.currentTarget.style.boxShadow = '0 6px 16px rgba(0, 132, 255, 0.6)';
+        e.currentTarget.style.boxShadow = '0 6px 16px #e14b85cc';
       }}
       onMouseOut={e => {
         e.currentTarget.style.transform = 'scale(1)';
-        e.currentTarget.style.boxShadow = '0 4px 12px rgba(0, 132, 255, 0.4)';
+        e.currentTarget.style.boxShadow = '0 4px 12px #ffb6d580';
       }}
     >
       <i 

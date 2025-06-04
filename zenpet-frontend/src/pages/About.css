@@ -1,0 +1,183 @@
+.zenpet-about-page {
+  min-height: 100vh;
+  background: #fff;
+  padding-bottom: 32px;
+}
+.zenpet-about-header {
+  text-align: center;
+  margin: 40px 0 32px;
+}
+.zenpet-about-header span {
+  background: linear-gradient(90deg,#e14b85 60%,#ffd6e0 100%);
+  color: #fff;
+  font-weight: 700;
+  font-size: 28px;
+  padding: 10px 36px;
+  border-radius: 12px;
+  letter-spacing: 1px;
+  box-shadow: 0 4px 18px #ffd6e040;
+  display: inline-block;
+  animation: fadeInDown 0.7s;
+}
+.zenpet-about-info {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 48px;
+  flex-wrap: wrap;
+  margin-bottom: 32px;
+}
+.zenpet-about-logo img {
+  width: 180px;
+  border-radius: 32px;
+  background: linear-gradient(135deg,#fff,#f9b6d1 80%);
+  box-shadow: 0 4px 24px #ffd6e040;
+  transition: transform 0.18s;
+  cursor: pointer;
+}
+.zenpet-about-logo img:hover {
+  transform: scale(1.08) rotate(-3deg);
+}
+.zenpet-about-info-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 22px;
+  min-width: 280px;
+  align-items: center;
+}
+.zenpet-about-info-card {
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 2px 12px #ffd6e040;
+  padding: 18px 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 600;
+  font-size: 16px;
+  color: #e14b85;
+  transition: box-shadow 0.18s, transform 0.18s;
+  animation: fadeInUp 0.7s;
+}
+.zenpet-about-info-card:hover {
+  box-shadow: 0 8px 24px #ffb6d5;
+  transform: scale(1.04);
+}
+.zenpet-about-info-icon {
+  font-size: 22px;
+}
+.zenpet-about-info-value {
+  color: #222;
+  font-weight: 700;
+  margin-left: 4px;
+}
+.zenpet-about-slogan {
+  text-align: center;
+  font-weight: 800;
+  font-size: 22px;
+  margin-bottom: 10px;
+  color: #e14b85;
+  letter-spacing: 1px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  animation: fadeIn 1s;
+}
+.zenpet-about-desc {
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+  flex-wrap: wrap;
+  margin-bottom: 48px;
+  align-items: center;
+}
+.zenpet-about-petimg {
+  flex: 0 0 120px;
+  height: 120px;
+  font-size: 60px;
+  background: linear-gradient(135deg,#fff,#f9b6d1 80%);
+  border-radius: 16px;
+  box-shadow: 0 2px 12px #ffd6e040;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: bounceIn 1.2s;
+}
+.zenpet-about-desc blockquote {
+  flex: 1 1 320px;
+  max-width: 540px;
+  color: #222;
+  font-size: 17px;
+  line-height: 1.7;
+  background: #fff;
+  border-left: 6px solid #e14b85;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px #ffd6e040;
+  padding: 22px 28px;
+  font-style: italic;
+  animation: fadeInRight 1s;
+}
+.zenpet-about-highlight {
+  color: #e14b85;
+  font-weight: 700;
+}
+.zenpet-about-partner {
+  max-width: 900px;
+  margin: 0 auto 48px;
+}
+.zenpet-about-partner-title {
+  font-weight: 700;
+  font-size: 20px;
+  margin-bottom: 12px;
+  color: #e14b85;
+  animation: fadeInLeft 0.7s;
+}
+.zenpet-about-partner-row {
+  display: flex;
+  gap: 32px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.zenpet-about-partner-desc {
+  flex: 1;
+  min-width: 220px;
+  color: #444;
+  font-size: 15px;
+}
+.zenpet-about-partner-logo img {
+  width: 80px;
+  border-radius: 16px;
+  background: #fff;
+  transition: transform 0.18s;
+  box-shadow: 0 2px 8px #ffd6e040;
+  cursor: pointer;
+}
+.zenpet-about-partner-logo img:hover {
+  transform: scale(1.12) rotate(4deg);
+}
+@media (max-width: 700px) {
+  .zenpet-about-info, .zenpet-about-partner-row, .zenpet-about-desc {
+    flex-direction: column;
+    gap: 18px;
+    align-items: center;
+  }
+  .zenpet-about-logo img {
+    width: 120px;
+  }
+  .zenpet-about-info-list {
+    grid-template-columns: 1fr;
+    min-width: 180px;
+  }
+  .zenpet-about-petimg {
+    width: 80px;
+    height: 80px;
+    font-size: 38px;
+  }
+}
+@keyframes fadeInDown { 0%{opacity:0;transform:translateY(-30px);} 100%{opacity:1;transform:none;} }
+@keyframes fadeInUp { 0%{opacity:0;transform:translateY(30px);} 100%{opacity:1;transform:none;} }
+@keyframes fadeIn { 0%{opacity:0;} 100%{opacity:1;} }
+@keyframes fadeInRight { 0%{opacity:0;transform:translateX(40px);} 100%{opacity:1;transform:none;} }
+@keyframes fadeInLeft { 0%{opacity:0;transform:translateX(-40px);} 100%{opacity:1;transform:none;} }
+@keyframes bounceIn { 0%{transform:scale(0.7);} 60%{transform:scale(1.1);} 100%{transform:scale(1);} } 

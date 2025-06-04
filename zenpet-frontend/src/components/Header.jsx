@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const headerStyle = {
-  background: '#fff', // white background
-  color: '#7c4a03', // brown text
+  background: 'linear-gradient(90deg, #fff 60%, #ffe4ec 100%)',
+  color: '#e14b85',
   padding: '0',
-  borderBottom: '2px solid #e0c08d',
+  borderBottom: '2px solid #ffe4ec',
   fontFamily: 'inherit',
-  boxShadow: '0 2px 8px #0001',
+  boxShadow: '0 2px 8px #ffd6e6',
 };
 
 const navStyle = {
@@ -16,16 +16,17 @@ const navStyle = {
   justifyContent: 'space-between',
   maxWidth: 1200,
   margin: '0 auto',
-  height: 64,
+  height: 70,
+  width: '100%',
 };
 
 const logoStyle = {
   display: 'flex',
   alignItems: 'center',
-  gap: 8,
+  gap: 10,
   fontWeight: 700,
-  fontSize: 22,
-  color: '#7c4a03',
+  fontSize: 26,
+  color: '#e14b85',
   textDecoration: 'none',
 };
 
@@ -36,164 +37,72 @@ const menuStyle = {
   fontSize: 16,
 };
 
-const authButtonStyle = {
-  background: '#7c4a03',
-  color: '#ffd966',
-  border: 'none',
-  borderRadius: 20,
-  padding: '6px 18px',
-  fontWeight: 700,
-  fontSize: 16,
-  cursor: 'pointer',
-  boxShadow: '0 2px 8px #e0c08d44',
-  transition: 'transform 0.2s, box-shadow 0.2s',
-};
-
-const iconButtonStyle = {
-  background: 'none',
-  border: 'none',
-  color: '#7c4a03',
-  cursor: 'pointer',
-  padding: '8px',
+const emailFormStyle = {
   display: 'flex',
   alignItems: 'center',
-  gap: '4px',
-  fontSize: 16,
+  gap: 8,
+  background: '#fff',
+  borderRadius: 18,
+  padding: '4px 10px',
+  boxShadow: '0 2px 8px #ffd6e6',
+};
+
+const emailInputStyle = {
+  border: '1px solid #ffb6d5',
+  borderRadius: 8,
+  padding: '7px 12px',
+  fontSize: 15,
+  outline: 'none',
+  width: 180,
+};
+
+const emailButtonStyle = {
+  background: '#ff5e9c',
+  color: '#fff',
+  border: 'none',
+  borderRadius: 8,
+  padding: '7px 18px',
+  fontSize: 15,
+  cursor: 'pointer',
   fontWeight: 600,
+  transition: 'background 0.2s',
 };
 
 export default function Header() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [user, setUser] = useState(null);
-  const navigate = useNavigate();
+  const [email, setEmail] = useState('');
+  const [submitted, setSubmitted] = useState(false);
 
-  useEffect(() => {
-    const token = localStorage.getItem('token');
-    const userData = localStorage.getItem('user');
-    if (token && userData) {
-      setIsAuthenticated(true);
-      setUser(JSON.parse(userData));
-    }
-  }, []);
-
-  const handleLogout = () => {
-    localStorage.removeItem('token');
-    localStorage.removeItem('user');
-    setIsAuthenticated(false);
-    setUser(null);
-    navigate('/');
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setSubmitted(true);
+    setTimeout(() => setSubmitted(false), 2500);
+    setEmail('');
   };
 
   return (
     <header style={headerStyle}>
       <nav style={navStyle}>
         <Link to="/" style={logoStyle}>
-          <img src="https://cdn-icons-png.flaticon.com/512/616/616408.png" alt="ZenPet Logo" style={{width: 40, background: '#ffe4ec', borderRadius: '50%'}} />
-          ZenPet
+          <img src={require('../assets/logo.png')} alt="ZenPet Logo" style={{width: 48, background: 'none', borderRadius: '50%'}} />
+          ZenPETs
         </Link>
         <div style={menuStyle}>
-          <Link to="/about" style={{color: '#7c4a03', textDecoration: 'none'}}>Về chúng tôi</Link>
-          <Link to="/services" style={{color: '#7c4a03', textDecoration: 'none'}}>Dịch vụ</Link>
-          <Link to="/products" style={{color: '#7c4a03', textDecoration: 'none'}}>Sản phẩm</Link>
-          
-          {isAuthenticated ? (
-            <>
-              <Link to="/profile">
-                <button 
-                  style={iconButtonStyle}
-                  onMouseOver={e => {
-                    e.currentTarget.style.transform = 'scale(1.05)';
-                  }}
-                  onMouseOut={e => {
-                    e.currentTarget.style.transform = 'scale(1)';
-                  }}
-                >
-                  <img 
-                    src="https://cdn-icons-png.flaticon.com/512/1077/1077114.png" 
-                    alt="Profile" 
-                    style={{width: 24, height: 24}}
-                  />
-                  {user?.name}
-                </button>
-              </Link>
-              <Link to="/cart">
-                <button 
-                  style={iconButtonStyle}
-                  onMouseOver={e => {
-                    e.currentTarget.style.transform = 'scale(1.05)';
-                  }}
-                  onMouseOut={e => {
-                    e.currentTarget.style.transform = 'scale(1)';
-                  }}
-                >
-                  <img 
-                    src="https://cdn-icons-png.flaticon.com/512/2838/2838895.png" 
-                    alt="Cart" 
-                    style={{width: 24, height: 24}}
-                  />
-                  Giỏ hàng
-                </button>
-              </Link>
-              <button 
-                onClick={handleLogout}
-                style={{
-                  ...authButtonStyle,
-                  background: '#ffd966',
-                  color: '#7c4a03',
-                  border: '2px solid #7c4a03',
-                }}
-                onMouseOver={e => {
-                  e.currentTarget.style.transform = 'scale(1.05)';
-                  e.currentTarget.style.boxShadow = '0 4px 12px #e0c08d66';
-                }}
-                onMouseOut={e => {
-                  e.currentTarget.style.transform = 'scale(1)';
-                  e.currentTarget.style.boxShadow = '0 2px 8px #e0c08d44';
-                }}
-              >
-                Đăng xuất
-              </button>
-            </>
-          ) : (
-            <>
-              <Link to="/login">
-                <button 
-                  style={authButtonStyle}
-                  onMouseOver={e => {
-                    e.currentTarget.style.transform = 'scale(1.05)';
-                    e.currentTarget.style.boxShadow = '0 4px 12px #e0c08d66';
-                  }}
-                  onMouseOut={e => {
-                    e.currentTarget.style.transform = 'scale(1)';
-                    e.currentTarget.style.boxShadow = '0 2px 8px #e0c08d44';
-                  }}
-                >
-                  Đăng nhập
-                </button>
-              </Link>
-              <Link to="/register">
-                <button 
-                  style={{
-                    ...authButtonStyle,
-                    background: '#ffd966',
-                    color: '#7c4a03',
-                    border: '2px solid #7c4a03',
-                  }}
-                  onMouseOver={e => {
-                    e.currentTarget.style.transform = 'scale(1.05)';
-                    e.currentTarget.style.boxShadow = '0 4px 12px #e0c08d66';
-                  }}
-                  onMouseOut={e => {
-                    e.currentTarget.style.transform = 'scale(1)';
-                    e.currentTarget.style.boxShadow = '0 2px 8px #e0c08d44';
-                  }}
-                >
-                  Đăng ký
-                </button>
-              </Link>
-            </>
-          )}
+          <Link to="/about" style={{color: '#e14b85', textDecoration: 'none'}}>Về chúng tôi</Link>
+          <Link to="/service" style={{color: '#e14b85', textDecoration: 'none'}}>Dịch vụ</Link>
+          <Link to="/product" style={{color: '#e14b85', textDecoration: 'none'}}>Sản phẩm</Link>
         </div>
+        <form style={emailFormStyle} onSubmit={handleSubmit}>
+          <input
+            type="email"
+            placeholder="Nhập email..."
+            value={email}
+            onChange={e => setEmail(e.target.value)}
+            required
+            style={emailInputStyle}
+          />
+          <button type="submit" style={emailButtonStyle}>Gửi</button>
+          {submitted && <span style={{color: '#1bbf5c', marginLeft: 8, fontWeight: 500}}>Đã gửi!</span>}
+        </form>
       </nav>
     </header>
   );

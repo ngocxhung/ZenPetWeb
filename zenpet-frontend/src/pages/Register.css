@@ -1,0 +1,89 @@
+.zenpet-register-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #fff5e6 0%, #ffe4ec 100%);
+  padding: 20px;
+}
+.zenpet-register-box {
+  background: #fff;
+  padding: 40px 32px;
+  border-radius: 20px;
+  box-shadow: 0 4px 24px #ffd6e0cc;
+  width: 100%;
+  max-width: 500px;
+  animation: fadeInDown 0.7s;
+}
+.zenpet-register-box h2 {
+  text-align: center;
+  color: #e14b85;
+  margin-bottom: 30px;
+  font-size: 28px;
+  font-weight: 800;
+}
+.zenpet-register-field {
+  margin-bottom: 20px;
+}
+.zenpet-register-field label {
+  display: block;
+  margin-bottom: 8px;
+  color: #e14b85;
+  font-weight: 600;
+}
+.zenpet-register-field input {
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1.5px solid #ffd6e0;
+  font-size: 16px;
+  outline: none;
+  transition: border 0.2s, box-shadow 0.2s;
+}
+.zenpet-register-field input:focus {
+  border: 1.5px solid #e14b85;
+  box-shadow: 0 2px 8px #ffd6e0;
+}
+.zenpet-register-error {
+  color: #fff;
+  background: #e14b85;
+  border-radius: 8px;
+  padding: 10px 0;
+  text-align: center;
+  margin-bottom: 16px;
+  animation: shake 0.3s;
+}
+.zenpet-register-box button[type="submit"] {
+  width: 100%;
+  padding: 14px;
+  background: linear-gradient(90deg, #e14b85, #ffb6d5);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 18px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+  margin-top: 8px;
+}
+.zenpet-register-box button[type="submit"]:hover {
+  background: linear-gradient(90deg, #ffb6d5, #e14b85);
+  transform: scale(1.03);
+}
+.zenpet-register-box p {
+  text-align: center;
+  margin-top: 20px;
+  color: #666;
+}
+.zenpet-register-box a {
+  color: #e14b85;
+  text-decoration: none;
+  font-weight: 600;
+}
+@media (max-width: 600px) {
+  .zenpet-register-box {
+    padding: 18px 4vw;
+  }
+}
+@keyframes fadeInDown { 0%{opacity:0;transform:translateY(-30px);} 100%{opacity:1;transform:none;} }
+@keyframes shake { 0%{transform:translateX(0);} 20%{transform:translateX(-8px);} 40%{transform:translateX(8px);} 60%{transform:translateX(-8px);} 80%{transform:translateX(8px);} 100%{transform:translateX(0);} } 

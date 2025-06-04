@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import './Register.css';
 
 export default function Register() {
   const [formData, setFormData] = useState({
@@ -10,159 +11,60 @@ export default function Register() {
     phoneNumber: '',
     address: ''
   });
+  const [error, setError] = useState('');
 
   const handleChange = (e) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
     });
+    setError('');
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (formData.password !== formData.confirmPassword) {
+      setError('Mật khẩu xác nhận không khớp!');
+      return;
+    }
     // Xử lý đăng ký ở đây
+    setError('');
     console.log('Form submitted:', formData);
   };
 
   return (
-    <div style={{minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'linear-gradient(135deg, #fff5e6 0%, #ffe4ec 100%)', padding: '20px'}}>
-      <div style={{background: '#fff', padding: '40px', borderRadius: '20px', boxShadow: '0 4px 24px rgba(212, 106, 146, 0.2)', width: '100%', maxWidth: '500px'}}>
-        <h2 style={{textAlign: 'center', color: '#d46a92', marginBottom: '30px', fontSize: '28px'}}>Đăng ký tài khoản</h2>
-        <form onSubmit={handleSubmit}>
-          <div style={{marginBottom: '20px'}}>
-            <label style={{display: 'block', marginBottom: '8px', color: '#7c4a03', fontWeight: '600'}}>Email</label>
-            <input
-              type="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              style={{
-                width: '100%',
-                padding: '12px',
-                borderRadius: '8px',
-                border: '1.5px solid #ffd6e0',
-                fontSize: '16px',
-                outline: 'none'
-              }}
-              required
-            />
+    <div className="zenpet-register-page">
+      <div className="zenpet-register-box">
+        <h2>Đăng ký tài khoản</h2>
+        <form onSubmit={handleSubmit} autoComplete="off">
+          <div className="zenpet-register-field">
+            <label>Email</label>
+            <input type="email" name="email" value={formData.email} onChange={handleChange} required />
           </div>
-          <div style={{marginBottom: '20px'}}>
-            <label style={{display: 'block', marginBottom: '8px', color: '#7c4a03', fontWeight: '600'}}>Mật khẩu</label>
-            <input
-              type="password"
-              name="password"
-              value={formData.password}
-              onChange={handleChange}
-              style={{
-                width: '100%',
-                padding: '12px',
-                borderRadius: '8px',
-                border: '1.5px solid #ffd6e0',
-                fontSize: '16px',
-                outline: 'none'
-              }}
-              required
-            />
+          <div className="zenpet-register-field">
+            <label>Mật khẩu</label>
+            <input type="password" name="password" value={formData.password} onChange={handleChange} required />
           </div>
-          <div style={{marginBottom: '20px'}}>
-            <label style={{display: 'block', marginBottom: '8px', color: '#7c4a03', fontWeight: '600'}}>Xác nhận mật khẩu</label>
-            <input
-              type="password"
-              name="confirmPassword"
-              value={formData.confirmPassword}
-              onChange={handleChange}
-              style={{
-                width: '100%',
-                padding: '12px',
-                borderRadius: '8px',
-                border: '1.5px solid #ffd6e0',
-                fontSize: '16px',
-                outline: 'none'
-              }}
-              required
-            />
+          <div className="zenpet-register-field">
+            <label>Xác nhận mật khẩu</label>
+            <input type="password" name="confirmPassword" value={formData.confirmPassword} onChange={handleChange} required />
           </div>
-          <div style={{marginBottom: '20px'}}>
-            <label style={{display: 'block', marginBottom: '8px', color: '#7c4a03', fontWeight: '600'}}>Họ và tên</label>
-            <input
-              type="text"
-              name="fullName"
-              value={formData.fullName}
-              onChange={handleChange}
-              style={{
-                width: '100%',
-                padding: '12px',
-                borderRadius: '8px',
-                border: '1.5px solid #ffd6e0',
-                fontSize: '16px',
-                outline: 'none'
-              }}
-              required
-            />
+          <div className="zenpet-register-field">
+            <label>Họ và tên</label>
+            <input type="text" name="fullName" value={formData.fullName} onChange={handleChange} required />
           </div>
-          <div style={{marginBottom: '20px'}}>
-            <label style={{display: 'block', marginBottom: '8px', color: '#7c4a03', fontWeight: '600'}}>Số điện thoại</label>
-            <input
-              type="tel"
-              name="phoneNumber"
-              value={formData.phoneNumber}
-              onChange={handleChange}
-              style={{
-                width: '100%',
-                padding: '12px',
-                borderRadius: '8px',
-                border: '1.5px solid #ffd6e0',
-                fontSize: '16px',
-                outline: 'none'
-              }}
-              required
-            />
+          <div className="zenpet-register-field">
+            <label>Số điện thoại</label>
+            <input type="tel" name="phoneNumber" value={formData.phoneNumber} onChange={handleChange} required />
           </div>
-          <div style={{marginBottom: '30px'}}>
-            <label style={{display: 'block', marginBottom: '8px', color: '#7c4a03', fontWeight: '600'}}>Địa chỉ</label>
-            <input
-              type="text"
-              name="address"
-              value={formData.address}
-              onChange={handleChange}
-              style={{
-                width: '100%',
-                padding: '12px',
-                borderRadius: '8px',
-                border: '1.5px solid #ffd6e0',
-                fontSize: '16px',
-                outline: 'none'
-              }}
-              required
-            />
+          <div className="zenpet-register-field">
+            <label>Địa chỉ</label>
+            <input type="text" name="address" value={formData.address} onChange={handleChange} required />
           </div>
-          <button
-            type="submit"
-            style={{
-              width: '100%',
-              padding: '14px',
-              background: 'linear-gradient(90deg, #d46a92, #e09100)',
-              color: '#fff',
-              border: 'none',
-              borderRadius: '8px',
-              fontSize: '18px',
-              fontWeight: '600',
-              cursor: 'pointer',
-              transition: 'background 0.3s'
-            }}
-            onMouseOver={e => e.currentTarget.style.background = 'linear-gradient(90deg, #e09100, #d46a92)'}
-            onMouseOut={e => e.currentTarget.style.background = 'linear-gradient(90deg, #d46a92, #e09100)'}
-          >
-            Đăng ký
-          </button>
+          {error && <div className="zenpet-register-error">{error}</div>}
+          <button type="submit">Đăng ký</button>
         </form>
-        <p style={{textAlign: 'center', marginTop: '20px', color: '#666'}}>
-          Đã có tài khoản?{' '}
-          <Link to="/login" style={{color: '#d46a92', textDecoration: 'none', fontWeight: '600'}}>
-            Đăng nhập ngay
-          </Link>
-        </p>
+        <p>Đã có tài khoản? <Link to="/login">Đăng nhập ngay</Link></p>
       </div>
     </div>
   );

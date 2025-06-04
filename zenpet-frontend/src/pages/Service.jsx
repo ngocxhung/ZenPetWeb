@@ -1,4 +1,5 @@
 import React from 'react';
+import './Service.css';
 
 const services = [
   {
@@ -41,171 +42,62 @@ const services = [
 
 export default function Service() {
   return (
-    <div style={{
-      minHeight: '100vh',
-      background: 'linear-gradient(135deg, #fff 0%, #f8f6fa 100%)',
-      padding: '40px 20px'
-    }}>
-      {/* Header */}
-      <div style={{textAlign: 'center', marginBottom: 48}}>
-        <h1 style={{
-          fontSize: 36,
-          fontWeight: 800,
-          color: '#222',
-          marginBottom: 16,
-          textShadow: '2px 2px 4px rgba(0,0,0,0.1)'
-        }}>
-          Dịch Vụ Của Chúng Tôi
-        </h1>
-        <p style={{
-          fontSize: 18,
-          color: '#666',
-          maxWidth: 600,
-          margin: '0 auto',
-          lineHeight: 1.6
-        }}>
-          ZenPETs cung cấp đa dạng dịch vụ chăm sóc thú cưng chất lượng cao, 
-          giúp người bạn nhỏ của bạn luôn khỏe mạnh và hạnh phúc
-        </p>
+    <div className="zenpet-service-page">
+      <div className="zenpet-service-header">
+        <h1>Dịch Vụ & Sản Phẩm Nổi Bật</h1>
+        <p>ZenPETs cung cấp đa dạng dịch vụ chăm sóc thú cưng chất lượng cao, cùng sản phẩm công nghệ hiện đại giúp bạn an tâm và thú cưng luôn khỏe mạnh, hạnh phúc.</p>
       </div>
 
-      {/* Services Grid */}
-      <div style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-        gap: 32,
-        maxWidth: 1200,
-        margin: '0 auto',
-        padding: '0 20px'
-      }}>
+      {/* Sản phẩm nổi bật: Vòng định vị GPS ZenPETs & Ứng dụng đi kèm */}
+      <section className="zenpet-product-feature">
+        <div className="zenpet-product-feature-img">
+          <img src={require('../assets/product.png')} alt="Vòng định vị GPS ZenPETs" />
+        </div>
+        <div className="zenpet-product-feature-info">
+          <h2>Vòng định vị GPS ZenPETs</h2>
+          <p>
+            <b>Vòng định vị GPS ZenPETs</b> là thiết bị thông minh giúp bạn theo dõi vị trí, sức khỏe và hoạt động của thú cưng mọi lúc, mọi nơi. Kết nối trực tiếp với <b>ứng dụng ZenPETs</b> trên điện thoại, bạn sẽ nhận được cảnh báo khi thú cưng ra khỏi vùng an toàn, xem lịch sử di chuyển, đo vận động, nhịp tim, nhiệt độ và nhiều chỉ số sức khỏe khác.
+          </p>
+          <ul className="zenpet-product-feature-list">
+            <li>Định vị GPS chính xác, realtime 24/7</li>
+            <li>Cảnh báo khi thú cưng ra khỏi khu vực an toàn</li>
+            <li>Theo dõi sức khỏe: vận động, nhịp tim, nhiệt độ</li>
+            <li>Lưu trữ lịch sử di chuyển, báo cáo qua app</li>
+            <li>Pin lâu, chống nước, thiết kế nhỏ gọn, an toàn</li>
+            <li>Kết nối ứng dụng ZenPETs: quản lý nhiều thú cưng, chia sẻ cho gia đình</li>
+          </ul>
+          <div className="zenpet-product-feature-services">
+            <b>Dịch vụ đi kèm:</b>
+            <ul>
+              <li>Hỗ trợ lắp đặt, hướng dẫn sử dụng tận nơi</li>
+              <li>Bảo hành 1 đổi 1 trong 12 tháng</li>
+              <li>Tư vấn sức khỏe, dinh dưỡng miễn phí qua app</li>
+              <li>Chăm sóc, cứu hộ thú cưng 24/7 (gói mở rộng)</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      {/* Dịch vụ khác */}
+      <div className="zenpet-service-header" style={{marginTop: 48}}>
+        <h2>Dịch vụ chăm sóc toàn diện</h2>
+        <p>Chúng tôi mang đến giải pháp "tất cả trong một" cho thú cưng: từ sức khỏe, làm đẹp, lưu trú đến huấn luyện và tư vấn chuyên sâu.</p>
+      </div>
+      <div className="zenpet-service-grid">
         {services.map((service, index) => (
-          <div
-            key={service.title}
-            style={{
-              background: '#fff',
-              borderRadius: 20,
-              padding: 32,
-              boxShadow: '0 4px 20px rgba(0,0,0,0.08)',
-              transition: 'all 0.3s ease',
-              cursor: 'pointer',
-              position: 'relative',
-              overflow: 'hidden',
-              ':hover': {
-                transform: 'translateY(-5px)',
-                boxShadow: '0 8px 30px rgba(0,0,0,0.12)'
-              }
-            }}
-            onMouseOver={e => {
-              e.currentTarget.style.transform = 'translateY(-5px)';
-              e.currentTarget.style.boxShadow = '0 8px 30px rgba(0,0,0,0.12)';
-            }}
-            onMouseOut={e => {
-              e.currentTarget.style.transform = 'translateY(0)';
-              e.currentTarget.style.boxShadow = '0 4px 20px rgba(0,0,0,0.08)';
-            }}
-          >
-            <div style={{
-              fontSize: 48,
-              marginBottom: 20,
-              display: 'inline-block',
-              padding: 16,
-              borderRadius: 16,
-              background: 'linear-gradient(135deg, #f9b6d1 0%, #ffd6e0 100%)',
-              boxShadow: '0 4px 15px rgba(212,106,146,0.2)'
-            }}>
-              {service.icon}
-            </div>
-            <h3 style={{
-              fontSize: 24,
-              fontWeight: 700,
-              color: '#222',
-              marginBottom: 16
-            }}>
-              {service.title}
-            </h3>
-            <p style={{
-              fontSize: 16,
-              color: '#666',
-              lineHeight: 1.6,
-              marginBottom: 24
-            }}>
-              {service.description}
-            </p>
-            <div style={{
-              display: 'flex',
-              flexWrap: 'wrap',
-              gap: 8
-            }}>
+          <div className="zenpet-service-card" key={service.title}>
+            <div className="zenpet-service-icon">{service.icon}</div>
+            <h3>{service.title}</h3>
+            <p>{service.description}</p>
+            <div className="zenpet-service-features">
               {service.features.map(feature => (
-                <span
-                  key={feature}
-                  style={{
-                    background: '#f8f6fa',
-                    padding: '8px 16px',
-                    borderRadius: 20,
-                    fontSize: 14,
-                    color: '#d46a92',
-                    fontWeight: 500
-                  }}
-                >
-                  {feature}
-                </span>
+                <span key={feature}>{feature}</span>
               ))}
             </div>
           </div>
         ))}
       </div>
-
-      {/* Call to Action */}
-      <div style={{
-        textAlign: 'center',
-        marginTop: 64,
-        padding: '48px 20px',
-        background: 'linear-gradient(135deg, #d46a92 0%, #f9b6d1 100%)',
-        borderRadius: 24,
-        maxWidth: 800,
-        margin: '64px auto 0',
-        color: '#fff'
-      }}>
-        <h2 style={{
-          fontSize: 32,
-          fontWeight: 700,
-          marginBottom: 16
-        }}>
-          Sẵn sàng chăm sóc thú cưng của bạn?
-        </h2>
-        <p style={{
-          fontSize: 18,
-          marginBottom: 32,
-          opacity: 0.9
-        }}>
-          Đăng ký ngay để nhận ưu đãi đặc biệt cho lần sử dụng dịch vụ đầu tiên
-        </p>
-        <button
-          style={{
-            background: '#fff',
-            color: '#d46a92',
-            border: 'none',
-            padding: '16px 32px',
-            borderRadius: 30,
-            fontSize: 18,
-            fontWeight: 600,
-            cursor: 'pointer',
-            transition: 'all 0.3s ease',
-            boxShadow: '0 4px 15px rgba(0,0,0,0.1)'
-          }}
-          onMouseOver={e => {
-            e.currentTarget.style.transform = 'translateY(-2px)';
-            e.currentTarget.style.boxShadow = '0 6px 20px rgba(0,0,0,0.15)';
-          }}
-          onMouseOut={e => {
-            e.currentTarget.style.transform = 'translateY(0)';
-            e.currentTarget.style.boxShadow = '0 4px 15px rgba(0,0,0,0.1)';
-          }}
-        >
-          Đăng Ký Ngay
-        </button>
-      </div>
+     
     </div>
   );
 } 
