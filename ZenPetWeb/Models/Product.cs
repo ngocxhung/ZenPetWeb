@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace ZenPetWeb.Models
 {
@@ -32,10 +33,13 @@ namespace ZenPetWeb.Models
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow; // Creation timestamp
         [Required]
         public DateTime UpdatedAt { get; set; } = DateTime.UtcNow; // Last update timestamp
-        public virtual Category Category { get; set; } // Navigation property to Category
-        public virtual ICollection<OrderDetail> OrderDetails { get; set; } // Navigation property to Orders containing this product
-        public virtual ICollection<Review> Reviews { get; set; } // Navigation property to Reviews for this product
+        [JsonIgnore] // Cắt vòng lặp khi serialize
+        public virtual Category Category { get; set; }
 
+        [JsonIgnore]
+        public virtual ICollection<OrderDetail> OrderDetails { get; set; }
 
+        [JsonIgnore]
+        public virtual ICollection<Review> Reviews { get; set; }
     }
 }
