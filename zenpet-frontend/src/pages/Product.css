@@ -1,0 +1,123 @@
+.zenpet-product-page {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.zenpet-product-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.zenpet-category-filter {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin: 1rem 0;
+  flex-wrap: wrap;
+}
+
+.zenpet-category-filter button {
+  padding: 0.5rem 1rem;
+  border: 2px solid #e14b85;
+  border-radius: 20px;
+  background: transparent;
+  color: #e14b85;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.zenpet-category-filter button.active,
+.zenpet-category-filter button:hover {
+  background: #e14b85;
+  color: white;
+}
+
+.zenpet-product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 2rem;
+  padding: 1rem;
+}
+
+.zenpet-product-card {
+  background: white;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  transition: transform 0.3s;
+  text-decoration: none;
+  color: inherit;
+}
+
+.zenpet-product-card:hover {
+  transform: translateY(-5px);
+}
+
+.zenpet-product-image {
+  position: relative;
+  padding-top: 100%;
+}
+
+.zenpet-product-image img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.zenpet-product-discount {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: #e14b85;
+  color: white;
+  padding: 0.25rem 0.5rem;
+  border-radius: 15px;
+  font-size: 0.9rem;
+}
+
+.zenpet-product-info {
+  padding: 1rem;
+}
+
+.zenpet-product-info h3 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.1rem;
+  color: #333;
+}
+
+.zenpet-product-price {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0.5rem 0;
+}
+
+.original-price {
+  text-decoration: line-through;
+  color: #999;
+  font-size: 0.9rem;
+}
+
+.discounted-price {
+  color: #e14b85;
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.zenpet-product-rating {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  color: #ffb800;
+}
+
+.zenpet-loading {
+  text-align: center;
+  padding: 2rem;
+  font-size: 1.2rem;
+  color: #666;
+} 

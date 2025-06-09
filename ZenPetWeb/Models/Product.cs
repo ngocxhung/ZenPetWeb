@@ -12,7 +12,7 @@ namespace ZenPetWeb.Models
         [StringLength(100)]
         public string ProductName { get; set; }
         [Required]
-        [StringLength(500)]
+        [StringLength(5000)]
         public string Description { get; set; }
         [Required]
         [DataType(DataType.Currency)]
@@ -37,5 +37,20 @@ namespace ZenPetWeb.Models
         public virtual ICollection<Review> Reviews { get; set; } // Navigation property to Reviews for this product
 
 
+    }
+    public class ProducTDTO
+    {
+        public int ProductId { get; set; }
+        public string ProductName { get; set; }
+        public string Description { get; set; }
+        public decimal? Price { get; set; }
+        public int Stock { get; set; }
+        public int? CategoryId { get; set; }
+        public string ImageUrl { get; set; }
+        public bool IsActive { get; set; } = true;
+        public decimal? Rating { get; set; } = 0;
+        public decimal? Discount { get; set; } = 0;
+        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+        public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
     }
 }

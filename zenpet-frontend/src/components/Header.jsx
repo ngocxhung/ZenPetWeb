@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import SlideCart from './SlideCart';
+import { useAdmin } from '../contexts/AdminContext';
+import { useCart } from '../contexts/CartContext';
 
 const headerStyle = {
   background: 'linear-gradient(90deg, #fff 60%, #ffe4ec 100%)',
@@ -68,19 +71,66 @@ const emailButtonStyle = {
   transition: 'background 0.2s',
 };
 
+const cartBtnStyle = {
+  position: 'relative',
+  background: '#fff',
+  border: 'none',
+  borderRadius: 18,
+  padding: '7px 18px',
+  boxShadow: '0 2px 8px #ffd6e6',
+  display: 'flex',
+  alignItems: 'center',
+  gap: 10,
+  cursor: 'pointer',
+  fontWeight: 700,
+  color: '#e14b85',
+  fontSize: 18,
+  transition: 'background 0.2s, box-shadow 0.2s',
+};
+
+const cartIconStyle = {
+  fontSize: 26,
+  color: '#e14b85',
+};
+
+const cartBadgeStyle = {
+  position: 'absolute',
+  top: 2,
+  right: 8,
+  background: '#e14b85',
+  color: '#fff',
+  borderRadius: '50%',
+  fontSize: 13,
+  fontWeight: 700,
+  minWidth: 22,
+  height: 22,
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  boxShadow: '0 2px 8px #ffd6e6',
+  border: '2px solid #fff',
+  zIndex: 2,
+};
+
 export default function Header() {
   const [email, setEmail] = useState('');
   const [submitted, setSubmitted] = useState(false);
+  const [showCart, setShowCart] = useState(false);
+  const { addEmail } = useAdmin();
+  const { cart } = useCart();
+  const cartCount = cart.reduce((sum, item) => sum + item.quantity, 0);
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    addEmail(email);
     setSubmitted(true);
     setTimeout(() => setSubmitted(false), 2500);
     setEmail('');
   };
 
   return (
-    <header style={headerStyle}>
+    <header style={{ ...headerStyle, position: 'fixed', top: 0, left: 0, width: '100%', zIndex: 1000 }}>
       <nav style={navStyle}>
         <Link to="/" style={logoStyle}>
           <img src={require('../assets/logo.png')} alt="ZenPet Logo" style={{width: 48, background: 'none', borderRadius: '50%'}} />
@@ -103,7 +153,18 @@ export default function Header() {
           <button type="submit" style={emailButtonStyle}>Gửi</button>
           {submitted && <span style={{color: '#1bbf5c', marginLeft: 8, fontWeight: 500}}>Đã gửi!</span>}
         </form>
+        <button
+          style={cartBtnStyle}
+          onClick={() => setShowCart(true)}
+          onMouseOver={e => e.currentTarget.style.background = '#ffe4ec'}
+          onMouseOut={e => e.currentTarget.style.background = '#fff'}
+        >
+          <i className="fas fa-shopping-cart" style={cartIconStyle}></i>
+          <span style={{fontWeight: 700, fontSize: 16}}>Giỏ hàng</span>
+          <span style={cartBadgeStyle}>{cartCount}</span>
+        </button>
       </nav>
+      <SlideCart show={showCart} setShow={setShowCart} />
     </header>
   );
 } 

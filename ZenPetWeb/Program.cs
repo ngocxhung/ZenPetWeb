@@ -6,6 +6,7 @@ using System.Text;
 using Microsoft.Extensions.FileProviders;
 using System.IO;
 using ZenPetWeb.Data;
+using ZenPetWeb;
 public class Program
 {
     public static void Main(string[] args)
@@ -23,12 +24,20 @@ public class Program
 
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
-        
+
         // Add CORS
         builder.Services.AddCors(options =>
         {
+            options.AddPolicy("AllowAll",
+       builder =>
+       {
+           builder.AllowAnyOrigin()
+                  .AllowAnyMethod()
+                  .AllowAnyHeader();
+       });
             options.AddDefaultPolicy(builder =>
             {
+
                 builder
                     .WithOrigins("http://localhost:3000")
                     .AllowAnyMethod()
@@ -43,6 +52,8 @@ public class Program
         builder.Services.AddDbContext<ApplicationDbContext>(options =>
             options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
         builder.Services.AddScoped<ApplicationDbContext>();
+
+
 
         // Add JWT Authentication
         builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -64,18 +75,18 @@ public class Program
         var app = builder.Build();
         // Gọi seed dữ liệu khi ứng dụng khởi động
         using (var scope = app.Services.CreateScope())
-{
-    var services = scope.ServiceProvider;
-    try
-    {
-        var context = services.GetRequiredService<ApplicationDbContext>();
-        DbInitializer.Initialize(context);
-    }
-    catch (Exception ex)
-    {
-        Console.WriteLine("Lỗi seed dữ liệu: " + ex.Message);
-    }
-}
+        {
+            var services = scope.ServiceProvider;
+            try
+            {
+                var context = services.GetRequiredService<ApplicationDbContext>();
+                DbInitializer.Initialize(context);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Lỗi seed dữ liệu: " + ex.Message);
+            }
+        }
 
         // Configure the HTTP request pipeline.
         if (app.Environment.IsDevelopment())
@@ -84,7 +95,21 @@ public class Program
             app.UseSwaggerUI();
             app.UseDeveloperExceptionPage();
         }
-
+        using (var scope = app.Services.CreateScope())
+        {
+            var services = scope.ServiceProvider;
+            try
+            {
+                var context = services.GetRequiredService<ApplicationDbContext>();
+                var addProductClass = new AddProductClass(context);
+                addProductClass.AddCategoryAsync();
+                addProductClass.AddProductAsync();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error seeding products and categories: " + ex.Message);
+            }
+        }
         // Use CORS before other middleware
         app.UseCors(builder =>
         {
@@ -102,9 +127,11 @@ public class Program
         {
             app.UseHttpsRedirection();
         }
-        
+
         // Add authentication middleware
         app.UseAuthentication();
+        app.UseCors("AllowAll");
+
         app.UseAuthorization();
         app.UseStaticFiles(); // Đảm bảo đã có dòng này
         app.UseStaticFiles(new StaticFileOptions

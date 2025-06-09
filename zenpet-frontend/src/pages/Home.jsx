@@ -1,9 +1,23 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './Home.css';
 
+const bannerImages = [
+  require('../assets/banner1.jpg'),
+  require('../assets/banner2.jpg'),
+  require('../assets/banner3.jpg'),
+];
+
 export default function Home() {
+  const [current, setCurrent] = useState(0);
+  useEffect(() => {
+    const timer = setInterval(() => setCurrent(c => (c + 1) % bannerImages.length), 3500);
+    return () => clearInterval(timer);
+  }, []);
+
   return (
     <div className="zenpet-homepage-layout">
+      {/* Banner Carousel */}
+      {/* Đã xóa banner carousel theo yêu cầu */}
       {/* Hero Section */}
       <section className="zenpet-hero">
         <div className="zenpet-hero-content">
@@ -13,7 +27,6 @@ export default function Home() {
         </div>
         <div className="zenpet-hero-img" />
       </section>
-
       {/* Services Section */}
       <section className="zenpet-section" id="services">
         <h2 className="zenpet-section-title">Dịch vụ nổi bật</h2>
@@ -25,32 +38,6 @@ export default function Home() {
           <div className="zenpet-service-card"><span>🥗</span><h3>Tư vấn dinh dưỡng</h3><p>Chế độ ăn cá nhân hóa, tư vấn bởi chuyên gia.</p></div>
         </div>
       </section>
-
-      {/* Featured Products/Packages Section */}
-      <section className="zenpet-section">
-        <h2 className="zenpet-section-title">Gói dịch vụ tiêu biểu</h2>
-        <div className="zenpet-featured-list">
-          <div className="zenpet-featured-card">
-            <img src={require('../assets/banner1.jpg')} alt="Gói chăm sóc toàn diện" />
-            <h3>Gói chăm sóc toàn diện</h3>
-            <p>Chăm sóc, theo dõi sức khỏe, làm đẹp, tư vấn dinh dưỡng trọn gói.</p>
-            <a href="#" className="zenpet-card-btn">Xem chi tiết</a>
-          </div>
-          <div className="zenpet-featured-card">
-            <img src={require('../assets/banner2.jpg')} alt="Vòng định vị thông minh" />
-            <h3>Vòng định vị thông minh</h3>
-            <p>Theo dõi vị trí, vận động, sức khỏe thú cưng mọi lúc mọi nơi.</p>
-            <a href="#" className="zenpet-card-btn">Xem chi tiết</a>
-          </div>
-          <div className="zenpet-featured-card">
-            <img src={require('../assets/banner3.jpg')} alt="Khách sạn thú cưng" />
-            <h3>Khách sạn thú cưng</h3>
-            <p>Lưu trú tiện nghi, an toàn, chăm sóc tận tình khi chủ vắng nhà.</p>
-            <a href="#" className="zenpet-card-btn">Xem chi tiết</a>
-          </div>
-        </div>
-      </section>
-
       {/* 3 Steps Section */}
       <section className="zenpet-section">
         <h2 className="zenpet-section-title">Chỉ 3 bước đơn giản</h2>
@@ -60,7 +47,6 @@ export default function Home() {
           <div className="zenpet-step-card"><span>📲</span><h3>Theo dõi & nhận báo cáo</h3><p>Cập nhật tình trạng, nhận báo cáo sức khỏe, hình ảnh thú cưng.</p></div>
         </div>
       </section>
-
       {/* Testimonial Section */}
       <section className="zenpet-section">
         <h2 className="zenpet-section-title">Khách hàng nói gì về ZenPETs?</h2>
@@ -81,7 +67,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
       {/* Partners Section */}
       <section className="zenpet-section zenpet-partners">
         <h2 className="zenpet-section-title">Đối tác của chúng tôi</h2>
@@ -92,8 +77,6 @@ export default function Home() {
           <img src="https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg" alt="Netflix" />
         </div>
       </section>
-
-     
     </div>
   );
 } 
