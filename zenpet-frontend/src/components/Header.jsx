@@ -133,7 +133,7 @@ export default function Header() {
     <header style={{ ...headerStyle, position: 'fixed', top: 0, left: 0, width: '100%', zIndex: 1000 }}>
       <nav style={navStyle}>
         <Link to="/" style={logoStyle}>
-          <img src={require('../assets/logo.png')} alt="ZenPet Logo" style={{width: 48, background: 'none', borderRadius: '50%'}} />
+          <img src={require('../assets/logo.png')} alt="ZenPet Logo" style={{width: 48, height: 48, objectFit: 'cover', background: 'none', borderRadius: '50%', boxShadow: '0 2px 8px #ffd6e6'}} />
           ZenPETs
         </Link>
         <div style={menuStyle}>

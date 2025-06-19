@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useCart } from '../contexts/CartContext';
+import axios from 'axios';
 import './ProductDetail.css';
 
 const ProductDetail = () => {
@@ -9,162 +10,114 @@ const ProductDetail = () => {
   const [product, setProduct] = useState(null);
   const [quantity, setQuantity] = useState(1);
   const [loading, setLoading] = useState(true);
-
-  // Dữ liệu mẫu cho sản phẩm
-  const sampleProducts = {
-    1: {
-      productId: 1,
-      productName: 'Vòng định vị GPS ZenPETs',
-      price: 1500000,
-      discount: 10,
-      rating: 4.5,
-      stock: 50,
-      imageUrl: 'https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?q=80&w=1000',
-      description: 'Vòng định vị GPS thông minh cho thú cưng với các tính năng:\n\n' +
-        '- Định vị GPS realtime\n' +
-        '- Cảnh báo vùng an toàn\n' +
-        '- Theo dõi sức khỏe (vận động, nhịp tim, nhiệt độ)\n' +
-        '- Lưu trữ lịch sử di chuyển\n' +
-        '- Pin lâu, chống nước\n' +
-        '- Kết nối app quản lý nhiều thú cưng'
-    },
-    2: {
-      productId: 2,
-      productName: 'Thức ăn cho chó Royal Canin',
-      price: 350000,
-      discount: 0,
-      rating: 4.8,
-      stock: 100,
-      imageUrl: 'https://images.unsplash.com/photo-1589924691995-400dc9ecc119?q=80&w=1000',
-      description: 'Thức ăn cao cấp cho chó trưởng thành với các ưu điểm:\n\n' +
-        '- Cân bằng dinh dưỡng\n' +
-        '- Hỗ trợ tiêu hóa\n' +
-        '- Tăng cường miễn dịch\n' +
-        '- Làm sạch răng\n' +
-        '- Hương vị thơm ngon'
-    },
-    3: {
-      productId: 3,
-      productName: 'Bàn chải đánh răng cho mèo',
-      price: 150000,
-      discount: 15,
-      rating: 4.2,
-      stock: 30,
-      imageUrl: 'https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?q=80&w=1000',
-      description: 'Bàn chải đánh răng chuyên dụng cho mèo với các đặc điểm:\n\n' +
-        '- Thiết kế ergonomic\n' +
-        '- Lông bàn chải mềm mại\n' +
-        '- Tay cầm chống trượt\n' +
-        '- Kích thước phù hợp với miệng mèo\n' +
-        '- Dễ dàng vệ sinh'
-    },
-    4: {
-      productId: 4,
-      productName: 'Chuồng vận chuyển thú cưng',
-      price: 850000,
-      discount: 5,
-      rating: 4.6,
-      stock: 20,
-      imageUrl: 'https://images.unsplash.com/photo-1548199973-03cce0bbc87b?q=80&w=1000',
-      description: 'Chuồng vận chuyển an toàn cho thú cưng với các tính năng:\n\n' +
-        '- Chất liệu nhựa cao cấp\n' +
-        '- Thiết kế thông thoáng\n' +
-        '- Cửa khóa an toàn\n' +
-        '- Đệm lót êm ái\n' +
-        '- Dễ dàng vệ sinh'
-    }
-  };
+  const [showDetail, setShowDetail] = useState(false);
 
   useEffect(() => {
-    // Giả lập loading
-    setTimeout(() => {
-      setProduct(sampleProducts[id]);
-      setLoading(false);
-    }, 1000);
+    setLoading(true);
+    axios.get(`https://localhost:7001/Product/${id}`)
+      .then(res => setProduct(res.data))
+      .catch(() => setProduct(null))
+      .finally(() => setLoading(false));
   }, [id]);
 
-  const handleQuantityChange = (value) => {
-    if (value >= 1 && value <= product.stock) {
-      setQuantity(value);
-    }
-  };
+  if (loading) return <div className="zenpet-product-detail-loading">Đang tải chi tiết sản phẩm...</div>;
+  if (!product) return <div className="zenpet-product-detail-error">Không tìm thấy sản phẩm.</div>;
 
-  const handleAddToCart = () => {
-    addToCart(product, quantity);
-    alert('Đã thêm vào giỏ hàng!');
-  };
-
-  if (loading) {
-    return <div className="zenpet-loading">Đang tải...</div>;
-  }
-
-  if (!product) {
-    return <div className="zenpet-error">Không tìm thấy sản phẩm</div>;
-  }
+  // Xử lý mô tả chỉ hiển thị 5 dòng đầu nếu chưa mở rộng
+  const descriptionLines = product.description ? product.description.split('\n') : [];
+  const shortDescription = descriptionLines.slice(0, 5).join('\n');
 
   return (
-    <div className="zenpet-product-detail">
-      <div className="zenpet-product-detail-container">
-        <div className="zenpet-product-detail-image">
-          <img src={product.imageUrl} alt={product.productName} />
-          {product.discount > 0 && (
-            <div className="zenpet-product-discount">
-              -{product.discount}%
-            </div>
-          )}
+    <div style={{maxWidth: 1100, margin: '40px auto', background: '#fff', borderRadius: 28, boxShadow: '0 6px 32px #ffd6e6', padding: 40, display: 'flex', flexDirection: 'column', gap: 32}}>
+      <div style={{display: 'flex', gap: 40, alignItems: 'flex-start', flexWrap: 'wrap'}}>
+        {/* Ảnh sản phẩm */}
+        <div style={{flex: '0 0 380px', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+          <img src={`https://localhost:7001${product.imageUrl}`} alt={product.productName} style={{width: 340, height: 340, objectFit: 'cover', borderRadius: 18, boxShadow: '0 4px 32px #ffd6e6', background: '#fff'}} />
         </div>
-
-        <div className="zenpet-product-detail-info">
-          <h1>{product.productName}</h1>
-          
-          <div className="zenpet-product-detail-price">
+        {/* Thông tin sản phẩm */}
+        <div style={{flex: 1, minWidth: 260}}>
+          <h2 style={{fontSize: 32, fontWeight: 800, marginBottom: 10}}>{product.productName}</h2>
+          <div style={{fontSize: 16, color: '#b94e7c', marginBottom: 10}}>
+            Danh mục: {product.category?.categoryName || ''}
+          </div>
+          <div style={{fontSize: 18, color: '#e14b85', marginBottom: 10, display: 'flex', alignItems: 'center', gap: 8}}>
+            <span style={{fontSize: 22}}>★</span> <span style={{fontWeight: 700}}>{product.rating || 0}</span>
+          </div>
+          <div style={{fontSize: 26, fontWeight: 700, marginBottom: 14, color: '#e14b85'}}>
             {product.discount > 0 ? (
               <>
-                <span className="original-price">
+                <span style={{textDecoration: 'line-through', color: '#888', marginRight: 12, fontSize: 18}}>
                   {product.price.toLocaleString('vi-VN')}đ
                 </span>
-                <span className="discounted-price">
+                <span style={{color: '#e14b85'}}>
                   {(product.price * (1 - product.discount / 100)).toLocaleString('vi-VN')}đ
                 </span>
               </>
             ) : (
-              <span>{product.price.toLocaleString('vi-VN')}đ</span>
+              <span style={{color: '#e14b85'}}>{product.price.toLocaleString('vi-VN')}đ</span>
             )}
           </div>
-
-          <div className="zenpet-product-detail-rating">
-            <i className="fas fa-star"></i>
-            <span>{product.rating?.toFixed(1) || '0.0'}</span>
-          </div>
-
-          <div className="zenpet-product-detail-stock">
-            <span>Còn lại: {product.stock} sản phẩm</span>
-          </div>
-
-          <div className="zenpet-product-detail-quantity">
-            <button onClick={() => handleQuantityChange(quantity - 1)}>-</button>
-            <input 
-              type="number" 
-              value={quantity} 
-              onChange={(e) => handleQuantityChange(parseInt(e.target.value))}
-              min="1"
+          <div style={{marginBottom: 14, color: '#444'}}>Còn lại: {product.stock} sản phẩm</div>
+          {/* Chọn số lượng và nút thêm giỏ hàng */}
+          <div style={{display: 'flex', alignItems: 'center', gap: 12, marginBottom: 24}}>
+            <button onClick={() => setQuantity(q => Math.max(1, q - 1))} style={{width: 36, height: 36, borderRadius: '50%', border: '1px solid #e14b85', background: '#fff', color: '#e14b85', fontSize: 20, fontWeight: 700, cursor: 'pointer'}}>-</button>
+            <input
+              type="number"
+              min={1}
               max={product.stock}
+              value={quantity}
+              onChange={e => setQuantity(Math.max(1, Math.min(product.stock, +e.target.value)))}
+              style={{ width: 54, textAlign: 'center', fontSize: 18, border: '1px solid #e14b85', borderRadius: 8, padding: '6px 0', color: '#e14b85', fontWeight: 700 }}
             />
-            <button onClick={() => handleQuantityChange(quantity + 1)}>+</button>
+            <button onClick={() => setQuantity(q => Math.min(product.stock, q + 1))} style={{width: 36, height: 36, borderRadius: '50%', border: '1px solid #e14b85', background: '#fff', color: '#e14b85', fontSize: 20, fontWeight: 700, cursor: 'pointer'}}>+</button>
           </div>
-
-          <button 
+          <button
             className="zenpet-add-to-cart-btn"
-            onClick={handleAddToCart}
+            style={{width: '100%', padding: '16px 0', fontSize: 20, fontWeight: 700, borderRadius: 24, background: 'linear-gradient(90deg, #ffb6d5 0%, #e14b85 100%)', color: '#fff', border: 'none', boxShadow: '0 2px 12px #ffd6e6', cursor: 'pointer'}}
+            onClick={() => addToCart(product, quantity)}
             disabled={product.stock === 0}
           >
-            {product.stock === 0 ? 'Hết hàng' : 'Thêm vào giỏ hàng'}
+            Thêm vào giỏ hàng
           </button>
-
-          <div className="zenpet-product-detail-description">
-            <h2>Mô tả sản phẩm</h2>
-            <p style={{ whiteSpace: 'pre-line' }}>{product.description}</p>
-          </div>
+        </div>
+      </div>
+      {/* Mô tả sản phẩm */}
+      <div style={{marginTop: 10}}>
+        <h3 style={{fontSize: 22, fontWeight: 800, color: '#e14b85', marginBottom: 10}}>Mô tả sản phẩm</h3>
+        <div style={{fontSize: 16, lineHeight: 1.7, color: '#444', background: '#fff7fa', borderRadius: 14, padding: 18, position: 'relative'}}>
+          <pre style={{whiteSpace: 'pre-line', background: 'none', fontFamily: 'inherit', margin: 0}}>
+            {showDetail ? product.description : shortDescription}
+          </pre>
+          {descriptionLines.length > 5 && (
+            <div style={{display: 'flex', justifyContent: 'center', marginTop: 10}}>
+              <button
+                onClick={() => setShowDetail(v => !v)}
+                style={{
+                  background: showDetail ? 'linear-gradient(90deg,#ffe4ec,#e14b85)' : '#fff',
+                  color: showDetail ? '#fff' : '#e14b85',
+                  border: '1.5px solid #e14b85',
+                  fontWeight: 700,
+                  cursor: 'pointer',
+                  fontSize: 15,
+                  padding: '7px 28px',
+                  borderRadius: 18,
+                  boxShadow: '0 2px 8px #ffd6e6',
+                  transition: 'all 0.18s',
+                  outline: 'none',
+                }}
+                onMouseOver={e => {
+                  e.currentTarget.style.background = 'linear-gradient(90deg,#ffe4ec,#e14b85)';
+                  e.currentTarget.style.color = '#fff';
+                }}
+                onMouseOut={e => {
+                  e.currentTarget.style.background = showDetail ? 'linear-gradient(90deg,#ffe4ec,#e14b85)' : '#fff';
+                  e.currentTarget.style.color = showDetail ? '#fff' : '#e14b85';
+                }}
+              >
+                {showDetail ? 'Ẩn bớt' : 'Xem thêm'}
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </div>

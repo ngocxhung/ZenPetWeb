@@ -36,6 +36,28 @@ public class ProductController : ControllerBase
         }
         return product;
     }
+    // Get products by Category 
+    [HttpGet("Category/{categoryId}")]
+    public async Task<ActionResult<IEnumerable<Product>>> GetProductsByCategory(int? categoryId)
+    {
+        if (categoryId == null)
+        {
+            return BadRequest("Category ID is required");
+        }
+        var products = await _context.Products
+            .Include(p => p.Category)
+            .Where(p => p.CategoryId == categoryId)
+            .ToListAsync();
+        // Check if any products were found
+        if(products == null || !products.Any())
+        {
+            return NotFound($"No products found for category ID {categoryId}");
+
+        }
+        return products;
+
+
+    }
     // Add a new product
     [HttpPost("Add")]
     public async Task<ActionResult<ProducTDTO>> AddProduct(ProducTDTO productDto)
@@ -109,6 +131,7 @@ public class ProductController : ControllerBase
 
 
     }
+    
 
 
 

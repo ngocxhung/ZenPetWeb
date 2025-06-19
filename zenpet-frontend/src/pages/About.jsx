@@ -1,4 +1,5 @@
 import React from 'react';
+import PageTitle from '../components/PageTitle';
 import './About.css';
 
 const infoItems = [
@@ -11,12 +12,13 @@ const infoItems = [
 export default function About() {
   return (
     <div className="zenpet-about-page">
+      <PageTitle title="Về chúng tôi" />
       <div className="zenpet-about-header">
         <span>Về ZenPETs</span>
       </div>
       <div className="zenpet-about-info">
         <div className="zenpet-about-logo">
-          <img src={require('../assets/logo.png')} alt="ZenPETs logo" />
+          <img src={require('../assets/logo.png')} alt="ZenPETs logo" style={{width: 180, height: 180, objectFit: 'cover', borderRadius: 32, background: 'linear-gradient(135deg,#fff,#f9b6d1 80%)', boxShadow: '0 4px 24px #ffd6e040', transition: 'transform 0.18s', cursor: 'pointer'}} />
         </div>
         <div className="zenpet-about-info-list">
           {infoItems.map((item, idx) => (

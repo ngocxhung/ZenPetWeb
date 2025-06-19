@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useCart } from '../contexts/CartContext';
+import PageTitle from '../components/PageTitle';
 
 export default function Cart() {
   const { cart, removeFromCart, updateQuantity, total } = useCart();
@@ -9,6 +10,7 @@ export default function Cart() {
 
   return (
     <div style={{ maxWidth: 1200, margin: '0 auto', padding: '40px 10px', fontFamily: 'inherit', minHeight: '80vh' }}>
+      <PageTitle title="Giỏ hàng" />
       <h2 style={{ color: '#e14b85', fontWeight: 800, fontSize: 28, marginBottom: 24, letterSpacing: 1 }}>
         GIỎ HÀNG CỦA BẠN
       </h2>

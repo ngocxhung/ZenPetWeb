@@ -18,4 +18,11 @@ namespace ZenPetWeb.Models
 
 
     }
+    public class CategoryDTO
+    {
+        public int CategoryId { get; set; }
+        public string CategoryName { get; set; }
+        public DateTime? CreateAt { get; set; } = DateTime.UtcNow;
+        public DateTime? UpdateTime { get; set; } = DateTime.UtcNow;
+    }
 }

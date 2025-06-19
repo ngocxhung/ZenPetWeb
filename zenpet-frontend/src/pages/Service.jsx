@@ -1,4 +1,5 @@
 import React from 'react';
+import PageTitle from '../components/PageTitle';
 import './Service.css';
 
 const services = [
@@ -43,6 +44,7 @@ const services = [
 export default function Service() {
   return (
     <div className="zenpet-service-page">
+      <PageTitle title="Dịch vụ" />
       <div className="zenpet-service-header">
         <h1>Dịch Vụ & Sản Phẩm Nổi Bật</h1>
         <p>ZenPETs cung cấp đa dạng dịch vụ chăm sóc thú cưng chất lượng cao, cùng sản phẩm công nghệ hiện đại giúp bạn an tâm và thú cưng luôn khỏe mạnh, hạnh phúc.</p>

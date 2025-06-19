@@ -41,7 +41,7 @@ export default function Footer() {
       <div style={{maxWidth: 1200, margin: '0 auto', display: 'flex', gap: 32, flexWrap: 'wrap', padding: '36px 16px 18px'}}>
         {/* Logo + mô tả */}
         <div style={{flex: 1, minWidth: 220, display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
-          <img src={require('../assets/logo.png')} alt="ZenPet Logo" style={{width: 54, background: 'none', borderRadius: '50%', marginBottom: 10}} />
+          <img src={require('../assets/logo.png')} alt="ZenPet Logo" style={{width: 54, height: 54, objectFit: 'cover', background: 'none', borderRadius: '50%', marginBottom: 10, boxShadow: '0 2px 8px #ffd6e6'}} />
           <div style={{textAlign: 'center', color: '#e14b85', maxWidth: 200}}>
             ZenPet - Giải pháp định vị và chăm sóc thú cưng toàn diện, an toàn, hiện đại.
           </div>
